@@ -89,6 +89,7 @@ function resizeCanvas() {
 
 
 function createPlayer() {
+	/*
 	document.addEventListener('keydown', function(evt){
             lastPress=evt.keyCode;
             pressing[evt.keyCode]=true;
@@ -99,6 +100,7 @@ function createPlayer() {
         player.isJumping=false;
 
     },false);
+*/
 
     document.addEventListener("click", function(evt){
     	player.jump();
@@ -195,9 +197,9 @@ function createPlatform(){
 	platform = {
 		x:canvasX-200,
 		y:randomRange((canvasY /2) +10 ,(canvasY /2)+40),
-		w:randomRange(150,300),
+		w:randomRange(150,290),
 		h:randomRange(5,6),
-		velocity:randomRange(5,5.6),
+		velocity:randomRange(5,5.7),
 		color:"#81F563",
 		draw : function() {
 			ctx.beginPath();
