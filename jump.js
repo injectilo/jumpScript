@@ -3,7 +3,6 @@ TODO
 --
 review collision
 googlefonts - Press Star
-Spacebar-jump
 
 */
 var canvas = document.getElementById("canvas");
@@ -24,17 +23,8 @@ var canvasY = window.innerHeight;
 var centerX = window.innerWidth/2;
 var centerY = window.innerHeight/2;
 
-/*
-var keys = [];
-var pressing=[];
 var lastPress;
-var KEY_ENTER=13;
-var KEY_LEFT=37;
-var KEY_UP=38;
-var KEY_RIGHT=39;
-var KEY_DOWN=40;
-var KEY_DISP=65;
-*/
+var KEY_SPACE=32;
 
 function init() {
 	resizeCanvas();
@@ -48,7 +38,13 @@ function startScreen() {
 	if(pause) {
 		document.addEventListener("click", function(evt){
     	pause = false;
-    });
+    	});
+    	document.addEventListener('keypress', function(e){
+            lastPress=e.keyCode || e.charCode;
+            if(lastPress==KEY_SPACE) {
+            	pause = false;
+            }  
+		});
 		points = 0;
 		//ctx.beginPath();
 		ctx.textAlign = 'center';
@@ -90,20 +86,15 @@ function resizeCanvas() {
 
 
 function createPlayer() {
-	/*
-	document.addEventListener('keydown', function(evt){
-            lastPress=evt.keyCode;
-            pressing[evt.keyCode]=true;
-	        },false);
 
-    document.addEventListener('keyup', function(evt){
-        pressing[evt.keyCode]=false; 
-        player.isJumping=false;
+	document.addEventListener('keypress', function(e){
+            lastPress=e.keyCode || e.charCode;
+            if(lastPress==KEY_SPACE) {
+            	player.jump();
+            }  
+	});
 
-    },false);
-*/
-
-    document.addEventListener("click", function(evt){
+    document.addEventListener("click", function(e){
     	player.jump();
     });
 
