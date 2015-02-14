@@ -1,3 +1,10 @@
+/*
+TODO
+--
+review collision
+googlefonts - Press Star
+Spacebar-jump
+*/
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var marker = document.getElementById("marker");
@@ -16,8 +23,8 @@ var canvasY = window.innerHeight;
 var centerX = window.innerWidth/2;
 var centerY = window.innerHeight/2;
 
+/*
 var keys = [];
-
 var pressing=[];
 var lastPress;
 var KEY_ENTER=13;
@@ -26,8 +33,7 @@ var KEY_UP=38;
 var KEY_RIGHT=39;
 var KEY_DOWN=40;
 var KEY_DISP=65;
-var inter=true;
-
+*/
 
 function init() {
 	resizeCanvas();
@@ -81,15 +87,6 @@ function resizeCanvas() {
     canvas.height = window.innerHeight - 5;
 }
 
-function distancia(ax,ay,bx,by){
-	var comp_horizontal = (bx-ax);
-	var comp_vertical = (by-ay);
-	comp_horizontal = comp_horizontal * comp_horizontal;
-	comp_vertical = comp_vertical * comp_vertical;
-	var distancia = Math.sqrt(comp_horizontal + comp_vertical);
-	return distancia;
-}
-
 
 function createPlayer() {
 	document.addEventListener('keydown', function(evt){
@@ -108,7 +105,7 @@ function createPlayer() {
     });
 
 	player = {
-		x: canvasX/ 5,
+		x: canvasX / 5,
 		y: 0,
 		r: 4,
 		vx: 6,
@@ -119,10 +116,8 @@ function createPlayer() {
 		jump:1,
 		n_jumps: 0,
 		force:0,
-		resiste:0,
 		vspeed:0,
 		gravity: 2.3,
-		reposo: true,
 		color: "salmon",
 		draw: function(){
 			ctx.beginPath();
@@ -179,11 +174,11 @@ function createPlayer() {
 			
 			}
 	       
-	         
+	       /*  
 	        if(pressing[KEY_RIGHT]){ this.x+=1 * this.vx; }
 	        if(pressing[KEY_DOWN]){this.y+=1  * this.vy; }   
 	        if(pressing[KEY_LEFT]){this.x-=1 * this.vx; }
-	        
+	        */
 		},
 		jump : function() {		
 			if(this.n_jumps < 2){
@@ -196,20 +191,11 @@ function createPlayer() {
 }
 
 
-function finish() {
-	points = 0;
-	timeline = 0;
-	var finishScreen = document.createElement("div");
-	finishScreen.style.backgroundColor = "red";
-
-	//document.appendChild(finishScreen);
-}
-
 function createPlatform(){
 	platform = {
 		x:canvasX-200,
 		y:randomRange((canvasY /2) +10 ,(canvasY /2)+40),
-		w:randomRange(150,280),
+		w:randomRange(150,300),
 		h:randomRange(5,6),
 		velocity:randomRange(5,5.6),
 		color:"#81F563",
