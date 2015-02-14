@@ -4,6 +4,7 @@ TODO
 review collision
 googlefonts - Press Star
 Spacebar-jump
+
 */
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -108,7 +109,7 @@ function createPlayer() {
 
 	player = {
 		x: canvasX / 5,
-		y: 0,
+		y: 70,
 		r: 4,
 		vx: 6,
 		vy: 4,
@@ -167,7 +168,7 @@ function createPlayer() {
 			} else {
 				//offcanvas
 				this.vspeed = 0;
-				this.y = 0;
+				this.y = 70;
 				this.time = 0;
 				this.force = 0;
 				this.n_jumps = 0;
