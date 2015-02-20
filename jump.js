@@ -3,6 +3,7 @@ TODO
 --
 review collision
 googlefonts - Press Star
+arrow indicates first jumps
 
 */
 var canvas = document.getElementById("canvas");
