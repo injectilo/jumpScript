@@ -51,7 +51,6 @@ function startScreen() {
             } 
 		});
 		points = 0;
-		//ctx.beginPath();
 		ctx.textAlign = 'center';
 		ctx.fillStyle = "rgba(0,0,0,0.9)";
 		ctx.fillRect(0,0,canvasX,canvasY);
@@ -107,7 +106,7 @@ function createPlayer() {
     });
 
 	player = {
-		x: canvasX / 5,
+		x: (canvasX / 5),
 		y: 70,
 		r: canvasX / (canvasX / 4),
 		vx: 6,
@@ -201,9 +200,9 @@ function yPlatform() {
 
 function createPlatform(){
 	platform = {
-		x:canvasX-200,
+		x:canvasX,
 		y:yPlatform(),
-		w:randomRange(150,290),
+		w:(canvasX * 20) / 100,
 		h:randomRange(5,6),
 		velocity:randomRange(5,5.7),
 		color:"#81F563",
@@ -220,7 +219,7 @@ function createPlatform(){
 	}
 	platforms.push(platform);
 }
-
+var distance = Math.floor(((canvasX * 5) / 100));
 
 function render() {
 	ctx.clearRect(0,0,canvasX,canvasY);
@@ -230,7 +229,7 @@ function render() {
 	player.draw();
 	player.control();
 
-	if(timeline % 60 == 0) {
+	if(timeline % distance == 0) {
 		createPlatform();
 	}
 	
