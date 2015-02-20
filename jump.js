@@ -1,9 +1,9 @@
 /*
-TODO
+TO-DO
 --
 review collision
-googlefonts - Press Star
-
+fast click - double tap
+responsive
 */
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -39,6 +39,10 @@ function startScreen() {
 		document.addEventListener("click", function(evt){
     	pause = false;
     	});
+    	document.addEventListener("touchstart", function(evt){
+    		evt.stopPropagation();
+    	pause = false;
+    	});
     	document.addEventListener('keypress', function(e){
             lastPress=e.keyCode || e.charCode;
             if(lastPress==KEY_SPACE) {
@@ -52,18 +56,18 @@ function startScreen() {
 		ctx.fillRect(0,0,canvasX,canvasY);
 		ctx.fillStyle = "white";
 		if(recordPoints > 0) {
-			ctx.font="40px Lucida Console";
+			ctx.font="40px 'Press Start 2P'";
 			ctx.fillText("Record: " + recordPoints,centerX-10, 100); 
 		} 
 		if(savedPoints > 0) {
-			ctx.font="18px Lucida Console";
+			ctx.font="18px 'Press Start 2P'";
 			ctx.fillText(savedPoints + " points",centerX-10, 210); 
 		} else {
-			ctx.font="16px Lucida Console";
+			ctx.font="16px 'Press Start 2P'";
 			ctx.fillText("Double click - Double Jump",centerX-10, 180); 
 		}
 		
-		ctx.font="26px Lucida Console";
+		ctx.font="26px 'Press Start 2P'";
 		ctx.fillText("Click to start",centerX-10, 150);		
 		ctx.fill();
 		//ctx.closePath();
@@ -94,6 +98,10 @@ function createPlayer() {
             }  
 	});
 
+    document.addEventListener("touchstart", function(e){
+    	e.stopPropagation();
+    	player.jump();
+    });
     document.addEventListener("click", function(e){
     	player.jump();
     });
@@ -131,7 +139,7 @@ function createPlayer() {
 			if(this.y < canvasY-10) {
 
 				for (var i = 0; i < platforms.length; i++) {
-					if((this.x < platforms[i].x || this.x > (platforms[i].x + platforms[i].w)) ||  (this.y - this.vspeed) > platforms[i].y+platforms[i].h ||  (this.y + this.vspeed + 5) < platforms[i].y) {
+					if((this.x < platforms[i].x - 10 || this.x > (platforms[i].x + platforms[i].w)) ||  (this.y - this.vspeed) > platforms[i].y+platforms[i].h ||  (this.y + this.vspeed + 4) < platforms[i].y) {
 						this.onFloor=false;	
 						//platforms[i].color = "black";
 					} else {
@@ -184,11 +192,17 @@ function createPlayer() {
 	}
 }
 
+function yPlatform() {
+	var yArr = [10,20,30,40,50,60];
+	var yPos = yArr[Math.floor(Math.random() * yArr.length)];
+	var yPlatform = (canvasY / 2) + yPos;
+	return yPlatform;
+}
 
 function createPlatform(){
 	platform = {
 		x:canvasX-200,
-		y:randomRange((canvasY /2) +10 ,(canvasY /2)+40),
+		y:yPlatform(),
 		w:randomRange(150,290),
 		h:randomRange(5,6),
 		velocity:randomRange(5,5.7),
