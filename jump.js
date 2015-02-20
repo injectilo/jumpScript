@@ -9,6 +9,11 @@ arrow indicates first jumps
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var marker = document.getElementById("marker");
+var canvasX = window.innerWidth;
+var canvasY = window.innerHeight;
+var centerX = window.innerWidth/2;
+var centerY = window.innerHeight/2;
+
 var timeline = 0;
 var player;
 var platform;
@@ -18,11 +23,7 @@ var points = 0;
 var pause = true;
 var savedPoints = 0;
 var recordPoints = 0;
-
-var canvasX = window.innerWidth;
-var canvasY = window.innerHeight;
-var centerX = window.innerWidth/2;
-var centerY = window.innerHeight/2;
+var distance = Math.floor(((canvasX * 6) / 100));
 
 var lastPress;
 var KEY_SPACE=32;
@@ -56,22 +57,21 @@ function startScreen() {
 		ctx.fillRect(0,0,canvasX,canvasY);
 		ctx.fillStyle = "white";
 		if(recordPoints > 0) {
-			ctx.font="3rem 'Press Start 2P'";
+			ctx.font="6vw 'Press Start 2P'";
 			ctx.fillText("Record: " + recordPoints,centerX-10, 100); 
 		} 
 		if(savedPoints > 0) {
-			ctx.font="1rem 'Press Start 2P'";
+			ctx.font="3vw 'Press Start 2P'";
 			ctx.fillText(savedPoints + " points",centerX-10, 210); 
 		} else {
-			ctx.font="0.9rem 'Press Start 2P'";
+			ctx.font="2vw 'Press Start 2P'";
 			ctx.fillText("Double click - Double Jump",centerX-10, 180); 
 		}
 		
-		ctx.font="2rem 'Press Start 2P'";
+		ctx.font="4vw 'Press Start 2P'";
 		ctx.fillText("Click to start",centerX-10, 150);		
 		ctx.fill();
 	}
-	
 }
 
 
@@ -80,11 +80,13 @@ function randomRange(min,max) {
 }
 
 function resizeCanvas() {
-	canvasX = window.innerWidth;
 	canvasY = window.innerHeight;
+	canvasX = window.innerWidth;
 	pixelsize = canvasY *.1;
     canvas.width = window.innerWidth - 5;
     canvas.height = window.innerHeight - 5;
+    centerX = window.innerWidth / 2;
+	centerY = window.innerHeight / 2;
 }
 
 
@@ -219,7 +221,7 @@ function createPlatform(){
 	}
 	platforms.push(platform);
 }
-var distance = Math.floor(((canvasX * 5) / 100));
+
 
 function render() {
 	ctx.clearRect(0,0,canvasX,canvasY);
@@ -266,4 +268,5 @@ init();
 })();
 
 
-window.addEventListener("resize", resizeCanvas);
+window.addEventListener("resize", resizeCanvas,true);
+//window.onresize = resizeCanvas;
