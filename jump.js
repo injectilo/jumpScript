@@ -3,12 +3,10 @@ TO-DO
 --
 review collision
 double tap
-responsive
 arrow indicates first jumps
 */
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var marker = document.getElementById("marker");
 var canvasX = window.innerWidth;
 var canvasY = window.innerHeight;
 var centerX = window.innerWidth/2;
@@ -57,18 +55,18 @@ function startScreen() {
 		ctx.fillRect(0,0,canvasX,canvasY);
 		ctx.fillStyle = "white";
 		if(recordPoints > 0) {
-			ctx.font="6vw 'Press Start 2P'";
-			ctx.fillText("Record: " + recordPoints,centerX-10, 100); 
+			ctx.font="4vw 'Press Start 2P'";
+			ctx.fillText("Record:" + recordPoints,centerX-10, 100); 
 		} 
 		if(savedPoints > 0) {
-			ctx.font="3vw 'Press Start 2P'";
+			ctx.font="2vw 'Press Start 2P'";
 			ctx.fillText(savedPoints + " points",centerX-10, 210); 
 		} else {
-			ctx.font="2vw 'Press Start 2P'";
+			ctx.font="1vw 'Press Start 2P'";
 			ctx.fillText("Double click - Double Jump",centerX-10, 180); 
 		}
 		
-		ctx.font="4vw 'Press Start 2P'";
+		ctx.font="3vw 'Press Start 2P'";
 		ctx.fillText("Click to start",centerX-10, 150);		
 		ctx.fill();
 	}
@@ -227,7 +225,8 @@ function render() {
 	ctx.clearRect(0,0,canvasX,canvasY);
 
 	timeline++;
-	marker.innerHTML = points;
+	ctx.font="6vw 'Press Start 2P'";
+	ctx.fillText(points,centerX, 100); 
 	player.draw();
 	player.control();
 
