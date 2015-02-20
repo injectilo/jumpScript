@@ -2,7 +2,7 @@
 TO-DO
 --
 review collision
-fast click - double tap
+double tap
 responsive
 arrow indicates first jumps
 */
@@ -41,14 +41,14 @@ function startScreen() {
     	pause = false;
     	});
     	document.addEventListener("touchstart", function(evt){
-    		evt.stopPropagation();
-    	pause = false;
+    		//evt.stopPropagation();
+    		pause = false;
     	});
     	document.addEventListener('keypress', function(e){
             lastPress=e.keyCode || e.charCode;
             if(lastPress==KEY_SPACE) {
             	pause = false;
-            }  
+            } 
 		});
 		points = 0;
 		//ctx.beginPath();
@@ -57,21 +57,20 @@ function startScreen() {
 		ctx.fillRect(0,0,canvasX,canvasY);
 		ctx.fillStyle = "white";
 		if(recordPoints > 0) {
-			ctx.font="40px 'Press Start 2P'";
+			ctx.font="3rem 'Press Start 2P'";
 			ctx.fillText("Record: " + recordPoints,centerX-10, 100); 
 		} 
 		if(savedPoints > 0) {
-			ctx.font="18px 'Press Start 2P'";
+			ctx.font="1rem 'Press Start 2P'";
 			ctx.fillText(savedPoints + " points",centerX-10, 210); 
 		} else {
-			ctx.font="16px 'Press Start 2P'";
+			ctx.font="0.9rem 'Press Start 2P'";
 			ctx.fillText("Double click - Double Jump",centerX-10, 180); 
 		}
 		
-		ctx.font="26px 'Press Start 2P'";
+		ctx.font="2rem 'Press Start 2P'";
 		ctx.fillText("Click to start",centerX-10, 150);		
 		ctx.fill();
-		//ctx.closePath();
 	}
 	
 }
@@ -110,7 +109,7 @@ function createPlayer() {
 	player = {
 		x: canvasX / 5,
 		y: 70,
-		r: 4,
+		r: canvasX / (canvasX / 4),
 		vx: 6,
 		vy: 4,
 		time: 0,
