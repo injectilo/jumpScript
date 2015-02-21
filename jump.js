@@ -85,6 +85,7 @@ function resizeCanvas() {
     canvas.height = window.innerHeight - 5;
     centerX = window.innerWidth / 2;
 	centerY = window.innerHeight / 2;
+	distance = Math.floor(((canvasX * 6) / 100));
 }
 
 
