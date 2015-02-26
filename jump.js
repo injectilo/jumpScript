@@ -200,7 +200,7 @@ function createPlatform(){
 		y:yPlatform(),
 		w:(canvasX * 20) / 100,
 		h:randomRange(5,6),
-		velocity:randomRange(5,5.7),
+		velocity:randomRange(5.5,6.7),
 		color:"#81F563",
 		draw : function() {
 			ctx.beginPath();
