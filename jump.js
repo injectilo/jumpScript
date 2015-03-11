@@ -176,11 +176,6 @@ function createPlayer() {
 			
 			}
 	       
-	       /*  
-	        if(pressing[KEY_RIGHT]){ this.x+=1 * this.vx; }
-	        if(pressing[KEY_DOWN]){this.y+=1  * this.vy; }   
-	        if(pressing[KEY_LEFT]){this.x-=1 * this.vx; }
-	        */
 		},
 		jump : function() {		
 			if(this.n_jumps < 2){
