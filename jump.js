@@ -19,7 +19,14 @@ var points = 0;
 
 var pause = true;
 var savedPoints = 0;
-var recordPoints = 0;
+
+var recordPoints;
+if(window.localStorage.getItem("recordPoints") !== "undefined") {
+  recordPoints = window.localStorage.getItem("recordPoints");
+} else {
+  recordPoints = 0;
+} 
+
 var distance = Math.floor(((canvasX * 6) / 100));
 
 var lastPress;
@@ -62,11 +69,11 @@ function startScreen() {
 			ctx.fillText(savedPoints + " points",centerX-10, 210); 
 		} else {
 			ctx.font="1vw 'Press Start 2P'";
-			ctx.fillText("Double click - Double Jump",centerX-10, 180); 
+			ctx.fillText("Double click - Double Jump",centerX-10, 190); 
 		}
 		
 		ctx.font="3vw 'Press Start 2P'";
-		ctx.fillText("Click to start",centerX-10, 150);		
+		ctx.fillText("Click to start",centerX-10, 160);		
 		ctx.fill();
 	}
 }
@@ -123,7 +130,7 @@ Player.prototype.control = function() {
 			if(this.y < canvasY-10) {
 
 				for (var i = 0; i < platforms.length; i++) {
-					if((this.x < platforms[i].x - 10 || this.x > (platforms[i].x + platforms[i].w)) ||  (this.y - this.vspeed) > platforms[i].y+platforms[i].h ||  (this.y + this.vspeed + 4) < platforms[i].y) {
+					if((this.x < platforms[i].x - 10 || this.x > (platforms[i].x + platforms[i].w)) ||  (this.y - this.vspeed) > platforms[i].y+platforms[i].h ||  (this.y + this.vspeed + this.vy) < platforms[i].y) {
 						this.onFloor=false;	
 						//platforms[i].color = "black";
 					} else {
@@ -142,7 +149,11 @@ Player.prototype.control = function() {
 					//onfloor
 					points++;
 					savedPoints = points;
-					if(recordPoints < savedPoints) recordPoints = savedPoints;
+					if(savedPoints >= recordPoints) {
+						recordPoints = savedPoints;
+						window.localStorage.setItem("recordPoints", recordPoints);
+					}
+					//if(recordPoints < savedPoints) recordPoints = savedPoints;
 					this.vspeed = 0;
 					this.time = 0;
 					this.n_jumps = 0;
@@ -204,8 +215,8 @@ function createPlatform(){
 function render() {
 	ctx.clearRect(0,0,canvasX,canvasY);
 	timeline++;
-	ctx.font="6vw 'Press Start 2P'";
-	ctx.fillText(points,centerX, 100); 
+	ctx.font="5vw 'Press Start 2P'";
+	ctx.fillText(points,centerX, 130); 
 	player.draw();
 	player.control();
 
