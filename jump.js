@@ -72,7 +72,7 @@ function startScreen() {
 			ctx.fillText("Double click - Double Jump",centerX-10, 190); 
 		}
 		
-		ctx.font="3vw 'Press Start 2P'";
+		ctx.font="2vw 'Press Start 2P'";
 		ctx.fillText("Click to start",centerX-10, 160);		
 		ctx.fill();
 	}
